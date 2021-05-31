@@ -35,11 +35,20 @@ private slots:
 
 	void Dialog::motorSaatYonu(QString yon);
 
+	void readSerial();
+
+	void displayRPM(QString value);
+
 private:
 	Ui::Dialog *ui;
 	QSerialPort *arduino;
 	static const quint16 arduino_vendor_id = 6790;
 	static const quint16 arduino_product_id = 29987;
+	QByteArray serialData;
+	QString serialBuffer;
+	QString parsed_data;
+	QString	displayData;
+	double realRPM;
 	QString arduino_port_name;
 	bool arduino_is_available;
 };

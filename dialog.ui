@@ -41,6 +41,12 @@
       <property name="cursor">
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
+      <property name="maximum">
+       <number>350</number>
+      </property>
+      <property name="singleStep">
+       <number>10</number>
+      </property>
      </widget>
     </item>
     <item>
