@@ -42,10 +42,10 @@
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="maximum">
-       <number>350</number>
+       <number>1500</number>
       </property>
       <property name="singleStep">
-       <number>10</number>
+       <number>100</number>
       </property>
      </widget>
     </item>
@@ -72,9 +72,9 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>150</y>
+     <y>160</y>
      <width>381</width>
-     <height>151</height>
+     <height>141</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -107,8 +107,8 @@
   <widget class="QLabel" name="label_6">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>10</y>
+     <x>10</x>
+     <y>0</y>
      <width>121</width>
      <height>31</height>
     </rect>
@@ -120,43 +120,10 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>40</y>
-     <width>21</width>
-     <height>101</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="verticalLayout_6">
-    <item>
-     <widget class="QLabel" name="KP_value_text">
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;0&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="KI_value_text">
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;0&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="KD_value_text">
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;0&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="layoutWidget">
-   <property name="geometry">
-    <rect>
      <x>20</x>
-     <y>40</y>
-     <width>90</width>
-     <height>101</height>
+     <y>30</y>
+     <width>91</width>
+     <height>111</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -190,9 +157,9 @@
    <property name="geometry">
     <rect>
      <x>120</x>
-     <y>40</y>
-     <width>251</width>
-     <height>101</height>
+     <y>30</y>
+     <width>261</width>
+     <height>111</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -200,9 +167,6 @@
      <widget class="QSlider" name="KP_value">
       <property name="maximum">
        <number>100</number>
-      </property>
-      <property name="singleStep">
-       <number>1</number>
       </property>
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
@@ -242,6 +206,16 @@
      <layout class="QVBoxLayout" name="verticalLayout_3"/>
     </item>
    </layout>
+  </widget>
+  <widget class="QTextEdit" name="textEdit_2">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>70</y>
+     <width>61</width>
+     <height>31</height>
+    </rect>
+   </property>
   </widget>
  </widget>
  <resources/>

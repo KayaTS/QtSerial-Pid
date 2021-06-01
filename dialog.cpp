@@ -105,21 +105,18 @@ void Dialog::on_KP_value_valueChanged(int value)
 {
 	ui ->label->setText(QString("<span style=\" font-size:10pt; font-weight:600;\">KP: %1</span>").arg(value/10.0));
 	Dialog::pidParameters(QString("p%1").arg(value/10.0));
-	qDebug() << value/10.0;
 }
 
 void Dialog::on_KI_value_valueChanged(int value)
 {
 	ui ->label_2->setText(QString("<span style=\" font-size:10pt; font-weight:600;\">KI: %1</span>").arg(value/100.0));
 	Dialog::pidParameters(QString("i%1").arg(value/100.0));
-	qDebug() << value/100.0;
 }
 
 void Dialog::on_KD_value_valueChanged(int value)
 {
 	ui ->label_3->setText(QString("<span style=\" font-size:10pt; font-weight:600;\">KD: %1</span>").arg(value/100.0));
 	Dialog::pidParameters(QString("d%1").arg(value/100.0));
-	qDebug() << value/100.0;
 }
 
 void Dialog::on_motorHiz_valueChanged(int value)
@@ -257,3 +254,4 @@ QtCharts::QChart *lineChart(){
 		//![5]
 
 	}
+

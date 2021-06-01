@@ -45,6 +45,8 @@ private slots:
 
 	//QtCharts::QChart *lineChart() const;
 
+
+
 private:
 	Ui::Dialog *ui;
 	QSerialPort *arduino;
