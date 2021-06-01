@@ -3,6 +3,9 @@
 
 #include <QDialog>
 #include <QSerialPort>
+#include <QtCharts/QChartView>
+#include <QtCharts/QLineSeries>
+#include <QElapsedTimer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Dialog; }
@@ -38,6 +41,9 @@ private slots:
 	void readSerial();
 
 	void displayRPM(QString value);
+	void displayChart(double rpm);
+
+	//QtCharts::QChart *lineChart() const;
 
 private:
 	Ui::Dialog *ui;
@@ -51,5 +57,9 @@ private:
 	double realRPM;
 	QString arduino_port_name;
 	bool arduino_is_available;
+	//QtCharts::QLineSeries *series = new QtCharts::QLineSeries();
+	QtCharts::QChart *chart = new QtCharts::QChart();
+	QtCharts::QChartView *chartView = new QtCharts::QChartView(chart);
+	QElapsedTimer timer;
 };
 #endif // DIALOG_H

@@ -4,7 +4,16 @@
 #include <QSerialPortInfo>
 #include <QDebug>
 #include <QtWidgets>
+#include <QtCharts/QSplineSeries>
 #include <QString>
+#include <QtCharts/QValueAxis>
+#include <QElapsedTimer>
+#include <QTime>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QApplication>
+#include <QtCharts/QChartView>
+#include <QtCharts/QLineSeries>
+#include <QtWidgets/QLabel>
 
 Dialog::Dialog(QWidget *parent)
 	: QDialog(parent)
@@ -18,11 +27,29 @@ Dialog::Dialog(QWidget *parent)
 		arduino_is_available = false;
 		arduino_port_name = "";
 		arduino = new QSerialPort;
+		//grafik icin time ayarlamalari
 
+		timer.start();
+		//QtCharts::QLineSeries *series = new QtCharts::QLineSeries();
+		QtCharts::QLineSeries *series = new QtCharts::QLineSeries();
+		series->append(0, 0);
 		/***
 		 *
-		 *
 		***/
+		//QtCharts::QChart *chart = new QtCharts::QChart();
+		chart->legend()->hide();
+		chart->createDefaultAxes();
+		chart->setTitle("Motor Hizi");
+		//QtCharts::QChartView *chartView = new QtCharts::QChartView(chart);
+		//chartView = new QtCharts::QChartView(lineChart());
+		//chartView = QtCharts::QChartView(chart);
+		chartView->chart()->setTheme(QtCharts::QChart::ChartThemeBrownSand);
+		ui->verticalLayout_3->addWidget(chartView);
+
+		QPalette pal = qApp->palette();
+		pal.setColor(QPalette::Window, QRgb(0x40434a));
+		pal.setColor(QPalette::WindowText, QRgb(0xd6d6d6));
+		qApp->setPalette(pal);
 		/*
 		qDebug() << "Number of available ports:" << QSerialPortInfo::availablePorts().length();
 		foreach (const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()) {
@@ -162,12 +189,11 @@ void Dialog::readSerial(){
 		}else{
 			// the second element of buffer_split is parsed correctly, update the temperature value on temp_lcdNumber
 			serialBuffer = "";
-			qDebug() << buffer_split << "\n";
 			parsed_data = buffer_split[1];
 			realRPM = parsed_data.toDouble(); // convert to fahrenheit
-			qDebug() << "RPM: " << realRPM << "\n";
 			parsed_data = QString::number(realRPM, 'g', 4); // format precision of temperature_value to 4 digits or fewer
 			Dialog::displayRPM(parsed_data);
+			Dialog::displayChart(realRPM);
 		}
 
 	}
@@ -175,3 +201,59 @@ void Dialog::displayRPM(QString value)
 {
 		ui ->gercekHiz->display(value);
 }
+
+void Dialog::displayChart(double rpm)
+{
+		QtCharts::QLineSeries *series = new QtCharts::QLineSeries(chart);
+		series->append(timer.elapsed()/100, rpm);
+		*series << QPointF(timer.elapsed()/100, rpm);
+		//QtCharts::QChart *chart = new QtCharts::QChart();
+		chart->addSeries(series);
+		chart->createDefaultAxes();
+		chart->axes(Qt::Horizontal).first()->setRange(0, timer.elapsed()/100 + 10);
+		chart->axes(Qt::Vertical).first()->setRange(0, 1500);
+		QtCharts::QValueAxis *axisY = qobject_cast<QtCharts::QValueAxis*>(chart->axes(Qt::Vertical).first());
+		Q_ASSERT(axisY);
+		axisY->setLabelFormat("%.1f  ");
+		//QtCharts::QChartView *chartView = new QtCharts::QChartView(chart);
+		//chartView = new QtCharts::QChartView(lineChart());
+
+		chartView->setRenderHint(QPainter::Antialiasing);
+		ui->verticalLayout_3->addWidget(chartView);
+
+}
+
+QtCharts::QChart *lineChart(){
+
+		//![1]
+			QtCharts::QLineSeries *series = new QtCharts::QLineSeries();
+		//![1]
+		//![2]
+			series->append(0, 8);
+			series->append(0, 8);
+			series->append(3, 8);
+			series->append(7, 4);
+			series->append(10, 5);
+			*series << QPointF(11, 1) << QPointF(13, 3) << QPointF(17, 6) << QPointF(18, 3) << QPointF(20, 2);
+		//![2]
+
+		//![3]
+			QtCharts::QChart *chart = new QtCharts::QChart();
+			chart->legend()->hide();
+			chart->addSeries(series);
+			chart->createDefaultAxes();
+			chart->setTitle("Simple line chart example");
+		//![3]
+
+			return chart;
+		//![4]
+			//QtCharts::QChartView *chartView = new QtCharts::QChartView(chart);
+			//chartView->setRenderHint(QPainter::Antialiasing);
+		//![4]
+
+
+		//![5]
+
+		//![5]
+
+	}
